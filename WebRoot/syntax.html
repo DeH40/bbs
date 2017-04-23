@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>syntax.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <link rel="stylesheet" type="text/css"href="syntaxhighlighter_3.0.83/styles/shCoreRDark.css"/> 
+
+  </head>
+  
+  <body>
+    This is my HTML page. <br>
+    
+    <div style="width:500px">
+    
+    <pre class="brush:jscript;">
+CKEDITOR.editorConfig = function( config ) {
+    /*config.uiColor =  &#39;#000000&#39;;*/
+    config.extraPlugins = &#39;dialog,clipboard,autolink,dialogui,image2,widget,smiley,font,codesnippet,richcombo,panel,floatpanel,listblock,lineutils,widgetselection,uploadimage,uploadwidget,filetools,notificationaggregator,notification,toolbar,button,syntaxhighlight&#39;;
+    /*richcombo,panel,floatpanel,listblock,lineutils,widgetselection,uploadimage,uploadwidget,filetools,notificationaggregator,notification,toolbar,button  */
+    config.removeButtons = &#39;Cut,Copy,Paste,Anchor,Link,Unlink,Indent,Outdent,Scayt,About,Format&#39;;
+        
+     
+    config.font_names  = &#39;宋体;黑体;楷体_GB2312;Times New Roman;微软雅黑;Consola;Arial;Comic Sans MS;Courier New;Tahoma;Verdana&#39;;
+    config.fontSize_defaultLabel = &#39;16px&#39;;
+    config.filebrowserImageUploadUrl  = &quot;upload&quot;;
+    config.tabSpaces = 4;
+};</pre>
+</div>
+
+    
+    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript">
+    SyntaxHighlighter.all();
+    </script>
+  </body>
+</html>
