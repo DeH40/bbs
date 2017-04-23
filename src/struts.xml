@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.saveDir" value="E://strutsupload"/>
+	
+    <package name="default" namespace="/" extends="struts-default">
+    
+    <result-types>
+        <result-type name="json" class="org.apache.struts2.json.JSONResult"></result-type>
+    </result-types>
+    
+        <interceptors>  
+    		<interceptor name="authority" class="com.bbs.interceptor.AuthorityInterceptor">
+    		</interceptor>
+            <!-- 拦截器栈 -->  
+            <interceptor-stack name="loginStack">  
+                <interceptor-ref name="authority" />
+                <interceptor-ref name="defaultStack" />  
+            </interceptor-stack>
+            
+            <interceptor-stack name="myStack">
+                 <interceptor-ref name="defaultStack" />
+             </interceptor-stack>  
+        </interceptors>
+        
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+        
+        <default-action-ref name="index"></default-action-ref>
+        
+        <global-results>  
+            <result name="login">login.jsp</result>  
+        </global-results> 
+    	
+        <action name="index" class="baseAction">
+            <result >
+              index.jsp
+            </result>
+        </action>
+        
+        
+        <action name="log" class="logAction">
+            <result>
+              log.jsp
+            </result>
+        </action>
+        
+        
+        <action name="detail" class="detailAction" method="detail">
+            <result >
+              detail.jsp
+            </result>
+        </action>
+        <action name="search" class="searchAction">
+            <result >
+              search.jsp
+            </result>
+        </action>
+        
+        <action name="rl" class="loginAndRegAction">
+	        <result type="json">
+	           <param name="root">jsonMap</param>
+	        </result>
+	        <result name="logout" type="redirectAction">
+	           index
+	        </result>
+	        <result name="activited" >
+	           login.jsp
+	        </result>
+        </action>
+        
+        <action name="manage" class="managementAction">
+            <result type="json">
+               <param name="root">jsonMap</param>
+            </result>
+        </action>
+        
+        <action name="getMessage" class="getMessageAction">
+            <result type="json">
+               <param name="root">jsonMap</param>
+            </result>
+        </action>
+        
+        <action name="rp" class="resetPasswdAction">
+            <result type="stream">
+                <param name="contentType">text/html</param>
+                <param name="contentCharSet">UTF-8</param>
+                <param name="inputStream">inputStream</param>
+            </result>
+        </action>
+        
+        <action name="validation" class="validationAction">
+            <result type="stream">
+                <param name="contentType">text/html</param>
+                <param name="contentCharSet">UTF-8</param>
+                <param name="inputStream">inputStream</param>
+            </result>
+        </action>
+        
+        <action name="validationCode" class="validationCodeAction">
+            <result type="stream">
+                <param name="contentType">image/jpeg</param>        
+                <param name="inputName">inputStream</param>
+            </result>
+        </action>
+        
+        <action name="publish" class="publishAction">
+        	<interceptor-ref name="loginStack" />
+        	<result name="success" type="redirectAction">
+        		index?cid=${cid}
+        	</result>
+        	
+        	<result name="reply" type="redirectAction">
+        		detail?tid=${tid}&amp;index=${index}
+        	</result>
+        	
+        </action>
+        
+        <action name="myzone" class="myZoneAction">
+            <interceptor-ref name="loginStack" />
+            <result>
+                myzone.jsp
+            </result>
+        </action>
+        
+        <action name="upload" class="uploadAction">
+            <result type="stream">
+                <param name="contentType">text/html</param>
+                <param name="contentCharSet">UTF-8</param>
+                <param name="inputStream">inputStream</param>
+            </result>
+        </action>
+    </package>
+    
+</struts>
